@@ -31,14 +31,10 @@ function updateButtonVisibility() {
 
   if (currentQuestion === questions.length - 1) {
     nextBtns[currentQuestion].style.display = 'none'; // Hide the last "Next" button on the last question
-    submitBtn.style.display = 'block'; // Show the submit button on the last question
-
   }
 
   if (selectedOption) {
     nextBtns[currentQuestion].style.display = 'block'; // Show the "Next" button when an option is selected
-    submitBtn.style.display = 'none'; // Hide the submit button when an option is selected
-
   }
 }
 
@@ -58,7 +54,6 @@ function handleNextClick() {
     } else {
       submitBtn.style.display = 'block';
       nextBtns.forEach(btn => btn.style.display = 'none');
-      
     }
   
     // Check if a radio button is selected
@@ -78,6 +73,13 @@ function showResult(total_questions) {
     console.log(questions.length)
     total_questions = parseInt(total_questions);
 
+     // Check if the score is equal to the total number of questions
+      if (score === total_questions) {
+        // Pass a congratulatory message to the result page
+        const congratulatoryMessage = "Congratulations! You scored perfectly!";
+        localStorage.setItem("congratulatoryMessage", congratulatoryMessage);
+      }
+      
     const url = `/result/${score}/${parseInt(total_questions)}/${encodeURIComponent(JSON.stringify(correctAnswers))}`;
     window.location.href = url;
 }

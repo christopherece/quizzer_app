@@ -27,19 +27,20 @@ function updateButtonVisibility() {
     } else {
       btn.style.display = 'block'; // Show other "Next" buttons
     }
+
   });
 
   if (currentQuestion === questions.length - 1) {
     nextBtns[currentQuestion].style.display = 'none'; // Hide the last "Next" button on the last question
-    submitBtn.style.display = 'block'; // Show the submit button on the last question
-
   }
 
   if (selectedOption) {
     nextBtns[currentQuestion].style.display = 'block'; // Show the "Next" button when an option is selected
-    submitBtn.style.display = 'none'; // Hide the submit button when an option is selected
-
   }
+}
+
+function attachNextButtonListeners() {
+  nextBtns.forEach(btn => btn.addEventListener('click', handleNextClick));
 }
 
   
@@ -50,14 +51,20 @@ function handleNextClick() {
   
       if (selectedOption) {
         console.log(selectedOption);
-
         showQuestion(currentQuestion + 1);
       } else {
         alert('Please select an option before proceeding.');
       }
     } else {
-      submitBtn.style.display = 'block';
-      nextBtns.forEach(btn => btn.style.display = 'none');
+      const currentQuestionElement = questions[currentQuestion];
+      const selectedOption = currentQuestionElement.querySelector('input[type="radio"]:checked');
+  
+      if (selectedOption){
+        submitBtn.style.display = 'block';
+        nextBtns.forEach(btn => btn.style.display = 'none');
+      } else {
+        alert('Please select an option before proceeding.');
+      }
       
     }
   
@@ -70,7 +77,10 @@ function handleNextClick() {
       console.log(radioName);
     }
   }
+
   
+
+
 
 
 function showResult(total_questions) {
@@ -78,6 +88,13 @@ function showResult(total_questions) {
     console.log(questions.length)
     total_questions = parseInt(total_questions);
 
+     // Check if the score is equal to the total number of questions
+      if (score === total_questions) {
+        // Pass a congratulatory message to the result page
+        const congratulatoryMessage = "Congratulations! You scored perfectly!";
+        localStorage.setItem("congratulatoryMessage", congratulatoryMessage);
+      }
+      
     const url = `/result/${score}/${parseInt(total_questions)}/${encodeURIComponent(JSON.stringify(correctAnswers))}`;
     window.location.href = url;
 }
@@ -113,9 +130,7 @@ function handleFormSubmit() {
     });
 }
 
-function attachNextButtonListeners() {
-    nextBtns.forEach(btn => btn.addEventListener('click', handleNextClick));
-}
+
 
 submitBtn.addEventListener('click', handleFormSubmit);
 showQuestion(0);  // Show the first question initially

@@ -9,6 +9,7 @@ class QuestionAdmin(admin.ModelAdmin):
         'text',
         'explanation',
         'photo_main',
+        'category',
 
 
     )

@@ -3,15 +3,26 @@ from questions.models import Question, Option
 from django.http import JsonResponse
 import random
 
-def index(request):
-    questions = list(Question.objects.all())
+def index(request, category):
+    questions = list(Question.objects.filter(category=category))
     random.shuffle(questions)
-    random_questions = questions[:15]  # Change the number (5) to the desired number of random questions to display
+    random_questions = questions[:5]  # Change the number (5) to the desired number of random questions to display
 
     context = {
-        'questions': random_questions
+        'questions': random_questions,
+        'category': category,
+
     }
     return render(request, 'pages/index.html', context)
+
+def dashboard(request):
+    categories = Question.objects.values_list('category', flat=True).distinct()
+
+    context = {
+        'categories': categories
+    }
+    return render(request, 'pages/dashboard.html', context)
+
 
 from django.core.exceptions import ObjectDoesNotExist
 def submit_quiz(request):
