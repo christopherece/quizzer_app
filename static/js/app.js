@@ -27,15 +27,20 @@ function updateButtonVisibility() {
     } else {
       btn.style.display = 'block'; // Show other "Next" buttons
     }
+
   });
 
-  if (currentQuestion === questions.length - 1) {
-    nextBtns[currentQuestion].style.display = 'none'; // Hide the last "Next" button on the last question
-  }
+  // if (currentQuestion === questions.length - 1) {
+  //   nextBtns[currentQuestion].style.display = 'none'; // Hide the last "Next" button on the last question
+  // }
 
-  if (selectedOption) {
+  if (selectedOption && currentQuestion >= questions.length - 1) {
     nextBtns[currentQuestion].style.display = 'block'; // Show the "Next" button when an option is selected
   }
+}
+
+function attachNextButtonListeners() {
+  nextBtns.forEach(btn => btn.addEventListener('click', handleNextClick));
 }
 
   
@@ -46,14 +51,21 @@ function handleNextClick() {
   
       if (selectedOption) {
         console.log(selectedOption);
-
         showQuestion(currentQuestion + 1);
       } else {
         alert('Please select an option before proceeding.');
       }
     } else {
-      submitBtn.style.display = 'block';
-      nextBtns.forEach(btn => btn.style.display = 'none');
+      const currentQuestionElement = questions[currentQuestion];
+      const selectedOption = currentQuestionElement.querySelector('input[type="radio"]:checked');
+  
+      if (selectedOption){
+        submitBtn.style.display = 'block';
+        nextBtns.forEach(btn => btn.style.display = 'none');
+      } else {
+        alert('Please select an option before proceeding.');
+      }
+      
     }
   
     // Check if a radio button is selected
@@ -65,7 +77,10 @@ function handleNextClick() {
       console.log(radioName);
     }
   }
+
   
+
+
 
 
 function showResult(total_questions) {
@@ -115,9 +130,7 @@ function handleFormSubmit() {
     });
 }
 
-function attachNextButtonListeners() {
-    nextBtns.forEach(btn => btn.addEventListener('click', handleNextClick));
-}
+
 
 submitBtn.addEventListener('click', handleFormSubmit);
 showQuestion(0);  // Show the first question initially

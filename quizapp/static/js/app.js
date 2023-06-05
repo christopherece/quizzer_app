@@ -21,21 +21,24 @@ function showQuestion(index) {
 function updateButtonVisibility() {
   const selectedOption = document.querySelector('input[type="radio"]:checked');
 
-  nextBtns.forEach((btn, index) => {
-    if (index === currentQuestion) {
-      btn.style.display = 'none'; // Hide the current question's "Next" button
-    } else {
-      btn.style.display = 'block'; // Show other "Next" buttons
-    }
+  // nextBtns.forEach((btn, index) => {
+  //   if (index === currentQuestion) {
+  //     btn.style.display = 'none'; // Hide the current question's "Next" button
+  //   } else {
+  //     btn.style.display = 'block'; // Show other "Next" buttons
+  //   }
 
-  });
+  // });
 
-  if (currentQuestion === questions.length - 1) {
-    nextBtns[currentQuestion].style.display = 'none'; // Hide the last "Next" button on the last question
-  }
+  // if (currentQuestion === questions.length - 1) {
+  //   nextBtns[currentQuestion].style.display = 'none'; // Hide the last "Next" button on the last question
+  // }
 
-  if (selectedOption) {
+  if (selectedOption && currentQuestion <= questions.length - 1) {
     nextBtns[currentQuestion].style.display = 'block'; // Show the "Next" button when an option is selected
+  } else {
+    nextBtns[currentQuestion].style.display = 'none'; // Show the "Next" button when an option is selected
+
   }
 }
 
