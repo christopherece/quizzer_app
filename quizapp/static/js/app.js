@@ -31,10 +31,14 @@ function updateButtonVisibility() {
 
   if (currentQuestion === questions.length - 1) {
     nextBtns[currentQuestion].style.display = 'none'; // Hide the last "Next" button on the last question
+    submitBtn.style.display = 'block'; // Show the submit button on the last question
+
   }
 
   if (selectedOption) {
     nextBtns[currentQuestion].style.display = 'block'; // Show the "Next" button when an option is selected
+    submitBtn.style.display = 'none'; // Hide the submit button when an option is selected
+
   }
 }
 
@@ -54,6 +58,7 @@ function handleNextClick() {
     } else {
       submitBtn.style.display = 'block';
       nextBtns.forEach(btn => btn.style.display = 'none');
+      
     }
   
     // Check if a radio button is selected
