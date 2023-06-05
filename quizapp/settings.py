@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'quizapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'quizapp_tbl',
+        'NAME': 'kidsquiz_tbl',
         'USER': 'postgres',
         'PASSWORD': '011258',
         'HOST':'127.0.0.1',

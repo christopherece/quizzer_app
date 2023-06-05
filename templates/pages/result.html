@@ -9,6 +9,9 @@
             </div>
             <div class="card-text">
                 <h2 class="text-center">Your score: {{ score }}/{{ total_questions }} - {{score_percentage}}% </h2>
+                {% if score == total_questions %}
+                    <p class="text-center">Congratulations! You have answered all questions correctly. Ask Mommy for a treat!</p>
+                {% endif %}
                 <ul>
                     {% for answer in answers %}
                         <li>
@@ -18,7 +21,7 @@
                             <strong>Your answer:</strong> {{ answer.selected_option }}
                         </li>
                         <li>
-                            <strong>Explanation:</strong> {{ answer.explanation }}
+                            <strong>Correct Answer:</strong> {{ answer.explanation }}
                         </li>
                             {% if answer.is_correct %}
                                 <li class="correct-answer" style="background-color: #90ee90">Correct Answer</li>
@@ -29,7 +32,11 @@
                     {% endfor %}
                 </ul>
             </div>
+            <div class="card-footer">
+                <a href={% url 'index' %} type="button" class="btn btn-primary form-control" style="display: block; font-size:30px;">Try Again!</a>
+            </div>
         </div>
     </div>
 </div>
 {% endblock %}
+
