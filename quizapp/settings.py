@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-auva=2&0q0op*!zeamd221*ylws9o1p-jazw=-@8+@v$j#-s62
 DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.10.135', 'localhost','kidsquizapp.balaydalakay.com']
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://kidsquizapp.balaydalakay.com','http://kidsquizapp.balaydalakay.com'
+]
 
 # Application definition
 
