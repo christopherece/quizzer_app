@@ -2,11 +2,16 @@ from django.shortcuts import render, redirect
 from questions.models import Question, Option
 from django.http import JsonResponse
 import random
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
+
+
 
 def index(request, category):
     questions = list(Question.objects.filter(category=category))
+
     random.shuffle(questions)
-    random_questions = questions[:5]  # Change the number (5) to the desired number of random questions to display
+    random_questions = questions[:10]  # Change the number (5) to the desired number of random questions to display
 
     context = {
         'questions': random_questions,
@@ -16,15 +21,13 @@ def index(request, category):
     return render(request, 'pages/index.html', context)
 
 def dashboard(request):
-    categories = Question.objects.values_list('category', flat=True).distinct()
-
+    categories = Question.objects.values_list('category', flat=True).distinct().order_by('category')
     context = {
         'categories': categories
     }
     return render(request, 'pages/dashboard.html', context)
 
 
-from django.core.exceptions import ObjectDoesNotExist
 def submit_quiz(request):
     if request.method == 'POST':
         # Process submitted answers and calculate the score
