@@ -13,3 +13,5 @@ COPY . .
 ENV DATABASE_HOST=192.168.10.225
 
 EXPOSE 9090
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:9090"]
