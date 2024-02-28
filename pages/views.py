@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from questions.models import Question, Option
+from pages.models import Category, Subcategory, Question, Option
 from django.http import JsonResponse
 import random
 from django.core.exceptions import ObjectDoesNotExist
@@ -7,21 +7,22 @@ from django.db.models import Q
 
 
 
-def index(request, category):
-    questions = list(Question.objects.filter(category=category))
+def index(request, category, subcategory):
+    questions = list(Question.objects.filter(category=category, subcategory=subcategory))
 
     random.shuffle(questions)
-    random_questions = questions[:10]  # Change the number (5) to the desired number of random questions to display
+    random_questions = questions[:10]  # Change the number (10) to the desired number of random questions to display
 
     context = {
         'questions': random_questions,
         'category': category,
-
+        'subcategory': subcategory,
     }
     return render(request, 'pages/index.html', context)
 
+
 def dashboard(request):
-    categories = Question.objects.values_list('category', flat=True).distinct().order_by('category')
+    categories = Category.objects.prefetch_related('question_set__option_set').all()
     context = {
         'categories': categories
     }

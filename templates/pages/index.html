@@ -6,34 +6,34 @@
         <form id="quizForm" action="{% url 'submit_quiz' %}" method="POST">
             {% csrf_token %}
             <div id="questionContainer" class="position-relative">
-                {% for question in questions %}
-                <div class="card mt-3 question">
-                    <div class="card-header" style="background-color: #90EE90">
-                        <h1 class="card-title" >Question {{ forloop.counter }}</h1>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="card-body">
-                                <p class="card-text" style="font-size: 100px; text-align:center">{{ question.text }} = ?</p>
-                                <div class="d-flex justify-content-center align-items-center">
-
-                                {% for option in question.options.all %}
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" style="transform: scale(2.0); font-size: 50px; margin-left:45px;" name="q{{ question.id }}" value="{{ option.id }}" data-correct="{{ option.is_correct }}">
-                                        <label class="form-check-label" style="margin-left: 30px; font-size:70px;">{{ option.text }}</label>
+                    {% for question in questions %}
+                    <div class="card mt-3 question">
+                        <div class="card-header" style="background-color: #90EE90">
+                            <h2 class="card-title" >Question {{ forloop.counter }}</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 50px; text-align:center">{{ question.text }} = ?</p>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        
+                                        {% for option in question.option_set.all %}
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" style="transform: scale(2.0); font-size: 25px; margin-left:45px;" name="q{{ question.id }}" value="{{ option.id }}" data-correct="{{ option.is_correct }}">
+                                                <label class="form-check-label" style="margin-left: 30px; font-size:20px;">{{ option.text }}</label>
+                                            </div>
+                                        {% endfor %}
                                     </div>
-                                {% endfor %}
                                 </div>
                             </div>
+                            {% comment %} <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                {% if question.photo_main and question.photo_main.url %}
+                                    <img src="{{ question.photo_main.url }}" alt="Image" class="img-fluid">
+                                {% endif %}
+                            </div> {% endcomment %}
                         </div>
-                        {% comment %} <div class="col-md-4 d-flex align-items-center justify-content-center">
-                            {% if question.photo_main and question.photo_main.url %}
-                                <img src="{{ question.photo_main.url }}" alt="Image" class="img-fluid">
-                            {% endif %}
-                        </div> {% endcomment %}
                     </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
             </div>
             <div class="card-footer" style="padding:0; margin:0">
                 <input type="hidden" name="total_questions" value="{{ questions|length }}">

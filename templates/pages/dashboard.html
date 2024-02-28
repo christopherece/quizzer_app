@@ -9,10 +9,15 @@
                 
                 <h5 class="card-title">{{ category }}</h5>
                 <p class="card-text">Are you in for a {{ category }} challenge?</p>
+                <ul>
+                  {% for subcategory in category.subcategory_set.all %}
+                    <a href="{% url 'index' category=category.id subcategory=subcategory.id %}" class="btn btn-info">{{subcategory.name}}</a>
+                  {% endfor %}
+              </ul>
               </div>
-              <div class="card-footer">
-                <a href="{% url 'index' category=category %}" class="btn btn-info">View Questions</a>
-              </div>
+              <!-- <div class="card-footer">
+                <a href="{% url 'index' category=category.id %}" class="btn btn-info">View Questions</a>
+              </div> -->
         </div>
         {% endfor %}
         {% comment %} <div class="card mt-3">
