@@ -12,7 +12,7 @@
                 <ul class="list-unstyled">
                     {% for subcategory in category.subcategory_set.all %}
                     <li>
-                      <a href="{% url 'index' category=category.id subcategory=subcategory.id %}" class="btn btn-info btn-sm m-1">{{subcategory.name}}</a>
+                      <a href="{% url 'index' category=category.id subcategory=subcategory.id %}" class="btn btn-info btn-sm p-1 mb-1">{{subcategory.name}}</a>
                     </li>
                     {% endfor %}
                 </ul>
