@@ -9,7 +9,7 @@
                 
                 <h5 class="card-title">{{ category }}</h5>
                 <p class="card-text">Are you in for a {{ category }} challenge?</p>
-                <ul>
+                <ul class="list-unstyled">
                   {% for subcategory in category.subcategory_set.all %}
                     <a href="{% url 'index' category=category.id subcategory=subcategory.id %}" class="btn btn-info">{{subcategory.name}}</a>
                   {% endfor %}
