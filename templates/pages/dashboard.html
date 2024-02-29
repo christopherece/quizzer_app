@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block content %}
@@ -6,20 +7,18 @@
         {% for category in categories %}
         <div class="card mt-3">
             <div class="card-body">
-                
                 <h5 class="card-title">{{ category }}</h5>
                 <p class="card-text">Are you in for a {{ category }} challenge?</p>
                 <ul class="list-unstyled">
-                  {% for subcategory in category.subcategory_set.all %}
-                    <a href="{% url 'index' category=category.id subcategory=subcategory.id %}" class="btn btn-info">{{subcategory.name}}</a>
-                  {% endfor %}
-              </ul>
-              </div>
-              
+                    {% for subcategory in category.subcategory_set.all %}
+                    <li>
+                      <a href="{% url 'index' category=category.id subcategory=subcategory.id %}" class="btn btn-info btn-sm mb-2">{{subcategory.name}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
         {% endfor %}
-        
-        
     </div>
 </div>
 {% endblock %}
