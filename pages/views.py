@@ -5,7 +5,12 @@ import random
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 
-
+def dashboard(request):
+    categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
+    context = {
+        'categories': categories
+    }
+    return render(request, 'pages/dashboard.html', context)
 
 def index(request, category, subcategory):
     questions = list(Question.objects.filter(category=category, subcategory=subcategory))
@@ -19,14 +24,6 @@ def index(request, category, subcategory):
         'subcategory': subcategory,
     }
     return render(request, 'pages/index.html', context)
-
-
-def dashboard(request):
-    categories = Category.objects.prefetch_related('question_set__option_set').all()
-    context = {
-        'categories': categories
-    }
-    return render(request, 'pages/dashboard.html', context)
 
 
 def submit_quiz(request):
