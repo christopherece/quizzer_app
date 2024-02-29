@@ -7,7 +7,7 @@
         <div class="card mt-3">
             <div class="card-body">
                 
-                <h5 class="card-title">{{ category }}</h5>
+                <h5 class="card-title">{{ category }}</h5><hr>
                 <p class="card-text">Are you in for a {{ category }} challenge?</p>
                 <ul class="list-unstyled">
                   {% for subcategory in category.subcategory_set.all %}
