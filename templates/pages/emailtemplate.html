@@ -1,16 +1,89 @@
+{% load static%}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz App Result</title>
+  <title>Quiz App</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+  <style>
+    /* Custom styles for the quiz app */
+    body {
+      font-size: 1.0rem; /* Increase the base font size */
+      font-family: 'Montserrat', sans-serif;
+
+      
+    }
+    .card a {
+      text-decoration: none;
+    }
+    h1 {
+      text-align: center;
+    }
+    
+    .question {
+      margin-bottom: 20px;
+    }
+    
+    .options label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    .submit-btn {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .question:not(.active) {
+      display: none;
+  }
+
+  
+
+  
+
+  
+  </style>
 </head>
 <body>
-    <h1>Your Daughter Score are as follows:</h1>
-    <p>Score: {{ score }}</p>
-    <p>Total Questions: {{ total_questions }}</p>
-    <p>Answers: {{ answers }}</p>
-    <p>Score Percentage: {{ score_percentage }}</p>
-</body>
-</html>
+    <div class="container">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="card-title">
+                    <h1>Quiz Result</h1>
+                </div>
+                <div class="card-text">
+                    <h2 class="text-center">Your score: {{ score }}/{{ total_questions }} - {{score_percentage}}% </h2>
+                    {% if score == total_questions %}
+                        <p class="text-center">Congratulations! You have answered all questions correctly. Ask Mommy for a treat!</p>
+                    {% endif %}
+                    <ul>
+                        {% for answer in answers %}
+                            <li>
+                                <strong>Question:</strong> {{ answer.question }}
+                            </li>
+                            <li>
+                                <strong>Your answer:</strong> {{ answer.selected_option }}
+                            </li>
+                            <li>
+                                <strong>Correct Answer:</strong> {{ answer.explanation }}
+                            </li>
+                                {% if answer.is_correct %}
+                                    <li class="correct-answer" style="background-color: #90ee90">Correct Answer</li>
+                                {% else %}
+                                    <li class="incorrect-answer" style="background-color: #ff726f">Incorrect Answer</li>
+                                {% endif %}
+                            <hr>
+                        {% endfor %}
+                    </ul>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+<footer id="main-footer" class="py-4 text-white text-center" style="margin: 20px 0 0 0; background-color: teal">
+    Copyright &copy;
+    <span class="year"></span> Quiz App
+</footer>
+</footer>

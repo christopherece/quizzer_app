@@ -72,7 +72,7 @@ def submit_quiz(request):
             'score_percentage': score_percentage,
         }
         # Render the HTML template with context
-        html_message = render_to_string('pages/result.html', context)
+        html_message = render_to_string('pages/emailtemplate.html', context)
 
         # Optionally, you can strip HTML tags for a plain text alternative
         plain_message = strip_tags(html_message)
