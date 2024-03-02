@@ -4,6 +4,11 @@ from django.http import JsonResponse
 import random
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 
 def dashboard(request):
     categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
@@ -66,6 +71,7 @@ def submit_quiz(request):
             'answers': answers,
             'score_percentage': score_percentage,
         }
+        
         return render(request, 'pages/result.html', context)
 
     else:
@@ -79,4 +85,19 @@ def result(request, score, total_questions, correct_answers):
         'total_questions': total_questions,
         'correct_answers': correct_answers
     }
+
+    # Render the HTML template with context
+    html_message = render_to_string('email_template.html', context)
+
+    # Optionally, you can strip HTML tags for a plain text alternative
+    plain_message = strip_tags(html_message)
+
+    # Sending email
+    send_mail(
+        'QuizApp Result',
+        plain_message,  # Plain text version of the email
+        'balaydalakay@gmail.com',  # From email address
+        ['christopheranchetaece@gmail.com'],  # To email address(es)
+        html_message=html_message,  # HTML version of the email
+    )
     return render(request, 'pages/result.html', context)
