@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Cards -->
+            <div class="col-md-8">
+                <form id="quizForm" action="{% url 'submit_quiz' %}" method="POST">
+                    {% csrf_token %}
+                    <div id="questionContainer" class="position-relative">
+                            {% for question in questions %}
+                            <div class="card mt-3 question">
+                                <div class="card-header" style="background-color: #90EE90">
+                                    <h2 class="card-title" >Question {{ forloop.counter }}</h2>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <div class="card-body">
+                                            <p class="card-text" style="font-size: 40px; text-align:center">{{ question.text }} = ?</p>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                
+                                                {% for option in question.option_set.all %}
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" style="transform: scale(1.5); font-size: 15px; margin-left:30px;" name="q{{ question.id }}" value="{{ option.id }}" data-correct="{{ option.is_correct }}">
+                                                        <label class="form-check-label" style="margin-left: 30px; font-size:15px;">{{ option.text }}</label>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% comment %} <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                        {% if question.photo_main and question.photo_main.url %}
+                                            <img src="{{ question.photo_main.url }}" alt="Image" class="img-fluid">
+                                        {% endif %}
+                                    </div> {% endcomment %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                    </div>
+                    <div class="card-footer" style="padding:0; margin:0">
+                        <input type="hidden" name="total_questions" value="{{ questions|length }}">
+                        <button type="button" class="btn btn-primary form-control nextBtn" style="font-size:30px">Next</button>
+                        <button type="submit" class="btn btn-primary form-control" id="submitBtn" style="display: none; font-size:30px;">Submit</button>
+                    </div>
+                </form>
+                <!-- Add more rows of cards as needed -->
+            </div>
+        </div>
+            <!-- Contact Form and Advertisement -->
+            {% include 'partials/_ads.html' %}
+        
+    </div>
+{% endblock %}
