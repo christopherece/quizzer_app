@@ -18,15 +18,34 @@
                                 <div class="col-md">
                                     <div class="card-body">
                                         <p class="card-text" style="font-size: 40px; text-align:center">{{ question.text }} = ?</p>
-                                        <div class="d-flex justify-content-center align-items-center">
+<hr>
+                                        <ul style="text-align: left; list-style-type: none;">
+                                          {% for option in question.option_set.all %}
+                                            {% if question.category == 'Math' %}
+                                              <li>
+                                                <input type="radio" style="transform: scale(2.0)" name="q{{ question.id }}" value="{{ option.id }}" data-correct="{{ option.is_correct }}">
+                                                <label style="font-size: 35px; padding-left: 10px;"> {{ option.text }}</label>
+
+                                              </li>
+
+                                              {% else %}
+                                              <li style="display: flex; align-items: center;">
+                                                <input type="radio" style="transform: scale(1.5); margin-right: 10px;" name="q{{ question.id }}" value="{{ option.id }}" data-correct="{{ option.is_correct }}">
+                                                <label style="font-size: 18 px;">{{ option.text }}</label>
+                                            </li>
+                                              {% endif %}
+                                            {% endfor %}
+
+                                        </ul>
+                                        <!-- <div class="options-container d-flex justify-content-center align-items-center">
                                             
                                             {% for option in question.option_set.all %}
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" style="transform: scale(1.5); font-size: 15px; margin-left:30px;" name="q{{ question.id }}" value="{{ option.id }}" data-correct="{{ option.is_correct }}">
-                                                    <label class="form-check-label" style="margin-left: 30px; font-size:15px;">{{ option.text }}</label>
+                                                    <label class="form-check-label" style="margin-left: 10px; font-size:15px;">{{ option.text }}</label>
                                                 </div>
                                             {% endfor %}
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 {% comment %} <div class="col-md-4 d-flex align-items-center justify-content-center">
@@ -50,4 +69,3 @@
         </div>
     </div>
 {% endblock %}
-
