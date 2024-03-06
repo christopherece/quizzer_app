@@ -5,6 +5,7 @@
     <div class="container mt-5">
         <div class="row">
             <!-- Cards -->
+
             <div class="col-md-8">
               <form id="quizForm" action="{% url 'submit_quiz' %}" method="POST">
                 {% csrf_token %}
@@ -21,7 +22,7 @@
 <hr>
                                         <ul style="text-align: left; list-style-type: none;">
                                           {% for option in question.option_set.all %}
-                                            {% if question.id == 1 %}
+                                            {% if category == '1' %}
                                               <li style="display: flex; align-items: center;">
                                                 <input type="radio" style="transform: scale(2.0)" name="q{{ question.id }}" value="{{ option.id }}" data-correct="{{ option.is_correct }}">
                                                 <label style="font-size: 55px; padding-left: 20px;"> {{ option.text }}</label>
