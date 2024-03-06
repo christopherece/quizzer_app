@@ -17,14 +17,14 @@
                             <div class="row">
                                 <div class="col-md">
                                     <div class="card-body">
-                                        <p class="card-text" style="font-size: 40px; text-align:center">{{ question.text }} = ?</p>
+                                        <p class="card-text" style="font-size: 50px; text-align:center">{{ question.text }} = ?</p>
 <hr>
                                         <ul style="text-align: left; list-style-type: none;">
                                           {% for option in question.option_set.all %}
-                                            {% if question.category == 'Math' %}
-                                              <li>
+                                            {% if question.id == 1 %}
+                                              <li style="display: flex; align-items: center;">
                                                 <input type="radio" style="transform: scale(2.0)" name="q{{ question.id }}" value="{{ option.id }}" data-correct="{{ option.is_correct }}">
-                                                <label style="font-size: 35px; padding-left: 10px;"> {{ option.text }}</label>
+                                                <label style="font-size: 55px; padding-left: 20px;"> {{ option.text }}</label>
 
                                               </li>
 
