@@ -34,6 +34,7 @@ CSRF_TRUSTED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'questions.apps.QuestionsConfig',
     'django.contrib.admin',
