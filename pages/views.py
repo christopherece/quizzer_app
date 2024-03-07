@@ -13,7 +13,9 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='loginUser')
 def dashboard(request):
-    categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
+    # categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
+    categories = Category.objects.filter(is_active=True, created_by=request.user).prefetch_related('subcategory_set', 'question_set__option_set')
+
     context = {
         'categories': categories
     }
