@@ -8,8 +8,10 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='loginUser')
 def dashboard(request):
     categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
     context = {
@@ -17,6 +19,7 @@ def dashboard(request):
     }
     return render(request, 'pages/dashboard.html', context)
 
+@login_required(login_url='loginUser')
 def index(request, category, subcategory):
     questions = list(Question.objects.filter(category=category, subcategory=subcategory))
 
@@ -30,7 +33,7 @@ def index(request, category, subcategory):
     }
     return render(request, 'pages/index.html', context)
 
-
+@login_required(login_url='loginUser')
 def submit_quiz(request):
     if request.method == 'POST':
         # Process submitted answers and calculate the score
@@ -92,7 +95,7 @@ def submit_quiz(request):
         return redirect('index')
 
 
-
+@login_required(login_url='loginUser')
 def result(request, score, total_questions, correct_answers):
     context = {
         'score': score,

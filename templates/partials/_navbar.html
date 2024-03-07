@@ -28,28 +28,35 @@
         >
             <a class="nav-link" href="#">About</a>
         </li>
-        <li
-            {% if 'listings' in request.path %}
-                class="nav-item active mr-3"
-            {% else %}
-                class="nav-item mr-3"
-            {% endif %}
-        >
-            <a class="nav-link" href="{% url 'profiles' %}">Profile</a>
-        </li>
+        
         </ul>
 
         <ul class="navbar-nav ml-auto">
-        <li class="nav-item mr-3">
-            <a class="nav-link" href="register.html">
-            <i class="fas fa-user-plus"></i> Register</a>
-        </li>
-        <li class="nav-item mr-3">
-            <a class="nav-link" href="{% url 'login' }">
-            <i class="fas fa-sign-in-alt"></i>
+            {% if request.user.is_authenticated %}
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="{% url 'logoutUser' %}">
+                    <i class="fas fa-sign-in-alt"></i>
 
-            Login</a>
+                    Logout</a>
+                </li>
+                <li
+                    {% if 'profiles' in request.path %}
+                        class="nav-item active mr-3"
+                    {% else %}
+                        class="nav-item mr-3"
+                    {% endif %}
+                >
+            <a class="nav-link" href="{% url 'profiles' %}">Profile</a>
         </li>
+                {% else %}
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="{% url 'loginUser' %}">
+                    <i class="fas fa-sign-in-alt"></i>
+
+                    Login / Signup</a>
+                </li>
+            {% endif %}
+        
         </ul>
     </div>
     </div>

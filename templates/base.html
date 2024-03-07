@@ -93,18 +93,30 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>
     <script type="text/javascript">
-      document.getElementById('quizForm').addEventListener('submit', function(event) {      
-      // Show overlay
-      document.getElementById('overlay').style.display = 'block';
-      
-      // Simulate form submission (you would replace this with your actual form submission logic)
-      setTimeout(function() {
-        // Hide overlay after some delay (replace this with your actual form submission completion logic)
-        document.getElementById('overlay').style.display = 'none';
-      }, 5000); // Change the delay as per your requirement
-    });
+        document.getElementById('quizForm').addEventListener('submit', function(event) {      
+        // Show overlay
+        document.getElementById('overlay').style.display = 'block';
+        
+        // Simulate form submission (you would replace this with your actual form submission logic)
+        setTimeout(function() {
+          // Hide overlay after some delay (replace this with your actual form submission completion logic)
+          document.getElementById('overlay').style.display = 'none';
+        }, 5000); // Change the delay as per your requirement
+      });
 
-  </script>
+
+    </script>
+    <script>
+      setTimeout(function(){
+      $('#message').fadeOut('slow');
+          console.log('Removing mesage')
+        },5000);
+    </script>
+
+    <script>
+        const date = new Date();
+        document.querySelector('.year').innerHTML = date.getFullYear();
+    </script>
   
 </body>
 </html>
