@@ -15,8 +15,8 @@ def loginUser(request):
         try:
             user = User.objects.get(username=username)
         except:
-            messages.error(request, 'User does not Exist')
-            return redirect('login')  
+            messages.error(request, 'User does not Exist!')
+            return redirect('loginUser')  
 
         user = authenticate(request, username=username, password=password)
 
@@ -25,8 +25,8 @@ def loginUser(request):
             messages.success(request, 'You are now logged in')
             return redirect('dashboard')
         else:
-            messages.error(request, 'Invalid Credentials')
-            return redirect('login')    
+            messages.error(request, 'Invalid Password!')
+            return redirect('loginUser')    
     return render(request, 'users/login.html')
 
 def logoutUser(request):
