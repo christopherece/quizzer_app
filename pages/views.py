@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from pages.models import Category, Subcategory, Question, Option
+from users.models import Profile, StudentStats
 from django.http import JsonResponse
 import random
 from django.core.exceptions import ObjectDoesNotExist
@@ -9,15 +10,19 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
 
 
 @login_required(login_url='loginUser')
 def dashboard(request):
+    student_stats = StudentStats.objects.all()
     # categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
     categories = Category.objects.filter(is_active=True, created_by=request.user).prefetch_related('subcategory_set', 'question_set__option_set')
 
     context = {
-        'categories': categories
+        'categories': categories,
+        'student_stats': student_stats,
     }
     return render(request, 'pages/dashboard.html', context)
 
@@ -70,11 +75,45 @@ def submit_quiz(request):
 
         # Calculate the score percentage
         score_percentage = round((score / total_questions) * 100, 2)
+
+        # Save the results in the database
+        user_id = request.user.id
+        category_id = request.POST.get('category')
+        subcategory_id=request.POST.get('subcategory')
+        score = score
+        total_questions = total_questions
+        score_percentage = score_percentage
+        # Retrieve User object
+        user = User.objects.get(pk=user_id)
+        # If category and subcategory are optional, handle the possibility of them being None
+        category = None
+        if category_id:
+            category = Category.objects.get(pk=category_id)
+
+        subcategory = None
+        if subcategory_id:
+            subcategory = Subcategory.objects.get(pk=subcategory_id)
+
+
+        # Create or update the StudentStats object
+        student_stats = StudentStats.objects.create(
+                    user=user,
+                    name=user.profile.name,
+                    category=category,
+                    subcategory=subcategory,
+                    score=score,
+                    total_questions=total_questions,
+                    score_percentage=score_percentage,
+                )
+
+
         context = {
             'score': score,
             'total_questions': total_questions,
             'answers': answers,
             'score_percentage': score_percentage,
+            'user': request.user,
+
         }
         # Render the HTML template with context
         html_message = render_to_string('pages/emailtemplate.html', context)
@@ -91,6 +130,7 @@ def submit_quiz(request):
             html_message=html_message,  # HTML version of the email
         )
         
+        messages.success(request, 'Thank you for taking the quiz! Result has been sent to your Teacher')
         return render(request, 'pages/result.html', context)
 
     else:
@@ -102,7 +142,8 @@ def result(request, score, total_questions, correct_answers):
     context = {
         'score': score,
         'total_questions': total_questions,
-        'correct_answers': correct_answers
+        'correct_answers': correct_answers,
+        'user': request.user,
     }
 
     

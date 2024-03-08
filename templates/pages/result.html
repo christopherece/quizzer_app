@@ -5,8 +5,10 @@
     <div class="card mb-3">
         <div class="card-body">
             <div class="card-title">
-                <h1>Quiz Result</h1>
+                <h1>Quiz Result for {{user.profile.name}}</h1>
             </div>
+            {% include 'partials/_alert.html' %}
+
             <div class="card-text">
                 <h2 class="text-center">Your score: {{ score }}/{{ total_questions }} - {{score_percentage}}% </h2>
                 {% if score == total_questions %}
@@ -33,7 +35,7 @@
                 </ul>
             </div>
             <div class="card-footer">
-                <a href="{% url 'dashboard' %}" type="button" class="btn btn-primary form-control" style="display: block; font-size:20px;">Try Again!</a>
+                <a href="{% url 'dashboard' %}" type="button" class="btn btn-primary form-control" style="display: block; font-size:px;">Go back to HomePage</a>
             </div>
         </div>
     </div>

@@ -33,21 +33,24 @@
 
         <ul class="navbar-nav ml-auto">
             {% if request.user.is_authenticated %}
+
+                <li
+                        {% if 'profiles' in request.path %}
+                            class="nav-item active mr-3"
+                        {% else %}
+                            class="nav-item mr-3"
+                        {% endif %}
+                    >
+                </li>
+
+                    <a class="nav-link" href="{% url 'profiles' %}">Profile</a>
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'logoutUser' %}">
                     <i class="fas fa-sign-in-alt"></i>
 
                     Logout</a>
                 </li>
-                <li
-                    {% if 'profiles' in request.path %}
-                        class="nav-item active mr-3"
-                    {% else %}
-                        class="nav-item mr-3"
-                    {% endif %}
-                >
-            <a class="nav-link" href="{% url 'profiles' %}">Profile</a>
-        </li>
+                
                 {% else %}
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'loginUser' %}">

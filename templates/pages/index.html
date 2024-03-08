@@ -7,7 +7,7 @@
         <div class="row">
             <!-- Cards -->
             {% include 'partials/_loading.html' %}
-     
+
             <div class="col-md-8">
               <form id="quizForm" action="{% url 'submit_quiz' %}" method="POST">
                 {% csrf_token %}
@@ -44,6 +44,9 @@
                                             {% endfor %}
 
                                         </ul>
+                                        <input type="hidden" name="category" value="{{ category }}">
+                                        <input type="hidden" name="subcategory" value="{{ subcategory }}">
+
                                         <!-- <div class="options-container d-flex justify-content-center align-items-center">
                                             
                                             {% for option in question.option_set.all %}
