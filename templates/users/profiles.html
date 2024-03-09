@@ -1,5 +1,53 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Users Profile</h1>
+    {% include 'partials/_alert.html' %}
+
+    <div class="container mt-5">
+        <h3>Welcome {{request.user.profile.name}}</h3>
+    </div>
+
+        <section id="profiles">
+            <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                <div class="card">
+                    
+                    <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                        <th>Subject</th>
+                        <th>Teacher</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Subjects</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for category in categories %}
+
+                        <tr>
+                            <td>{{category}}</td>
+                            <td>Teacher Chris</td>
+                            <td>April 12, 2024</td>
+                            <td>9:00 AM</td>
+                            <td>
+                                {% for subcategory in category.subcategory_set.all %}
+                                            
+                                <a  href="{% url 'index' category=category.id subcategory=subcategory.id %}" class="btn btn-info btn-sm mr-2 mb-2"> {{ subcategory.name }}</a>
+                                {% endfor %}
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+
+                    </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+            </div>
+        </section>
 {% endblock %}

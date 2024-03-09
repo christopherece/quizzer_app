@@ -4,6 +4,9 @@ from .models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
+from pages.models import Category, Subcategory, Question, Option
+
+
 from django.contrib import messages, auth
 
 # Create your views here.
@@ -23,7 +26,7 @@ def loginUser(request):
         if user is not None:
             login(request, user)
             messages.success(request, 'You are now logged in')
-            return redirect('dashboard')
+            return redirect('profiles')
         else:
             messages.error(request, 'Invalid Password!')
             return redirect('loginUser')    
@@ -36,4 +39,10 @@ def logoutUser(request):
 
 @login_required(login_url='loginUser')
 def profiles(request):
-    return render(request, 'users/profiles.html')
+    # categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
+    categories = Category.objects.filter(is_active=True, created_by=request.user).prefetch_related('subcategory_set', 'question_set__option_set')
+
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'users/profiles.html', context)

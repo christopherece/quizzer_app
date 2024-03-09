@@ -26,6 +26,7 @@ def dashboard(request):
     }
     return render(request, 'pages/dashboard.html', context)
 
+
 @login_required(login_url='loginUser')
 def index(request, category, subcategory):
     questions = list(Question.objects.filter(category=category, subcategory=subcategory))
@@ -36,7 +37,7 @@ def index(request, category, subcategory):
     context = {
         'questions': random_questions,
         'category': category,
-        'subcategory': subcategory,
+        'subcategories': subcategory,
     }
     return render(request, 'pages/index.html', context)
 
