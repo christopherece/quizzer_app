@@ -16,19 +16,20 @@ from django.contrib.auth.models import User
 
 @login_required(login_url='loginUser')
 def dashboard(request):
-    student_stats = StudentStats.objects.all()
+    studstats = StudentStats.objects.all()
     # categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
     categories = Category.objects.filter(is_active=True, created_by=request.user).prefetch_related('subcategory_set', 'question_set__option_set')
 
     context = {
         'categories': categories,
-        'student_stats': student_stats,
+        'student_stats': studstats,
     }
     return render(request, 'pages/dashboard.html', context)
 
 
 @login_required(login_url='loginUser')
 def index(request, category, subcategory):
+    
     questions = list(Question.objects.filter(category=category, subcategory=subcategory))
 
     random.shuffle(questions)
@@ -37,7 +38,7 @@ def index(request, category, subcategory):
     context = {
         'questions': random_questions,
         'category': category,
-        'subcategories': subcategory,
+        'subcategory': subcategory,
     }
     return render(request, 'pages/index.html', context)
 

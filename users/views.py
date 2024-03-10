@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from pages.models import Category, Subcategory, Question, Option
-
+from users.models import StudentStats
 
 from django.contrib import messages, auth
 
@@ -41,8 +41,9 @@ def logoutUser(request):
 def profiles(request):
     # categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
     categories = Category.objects.filter(is_active=True, created_by=request.user).prefetch_related('subcategory_set', 'question_set__option_set')
-
+    studstats = StudentStats.objects.all()
     context = {
         'categories': categories,
+        'studstats':studstats,
     }
     return render(request, 'users/profiles.html', context)

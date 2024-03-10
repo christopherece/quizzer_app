@@ -34,7 +34,7 @@ class StudentStats(models.Model):
     score = models.IntegerField(default=0)
     total_questions = models.IntegerField(default=0)
     score_percentage = models.FloatField(default=0)
-    is_enabled = models.BooleanField(default=False)
+    is_enabled = models.BooleanField(default=True)
     id = models.UUIDField(default=uuid.uuid4,unique=True, primary_key=True, editable=False)
 
     def __str__(self):
