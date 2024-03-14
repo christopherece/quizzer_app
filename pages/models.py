@@ -1,10 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -12,7 +14,9 @@ class Category(models.Model):
 class Subcategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
 
+    
     def __str__(self):
         return self.name
 
@@ -33,3 +37,15 @@ class Option(models.Model):
 
     def __str__(self):
         return self.text
+    
+class QuizAttempt(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
+    is_disabled = models.BooleanField(default=False)
+    disabled_css = models.CharField(max_length=200, default="disabled")  # Indicates if subcategory is disabled for the user
+
+    def __str__(self):
+        return f"{self.user.username} - {self.subcategory.name}"
+    
+
+    

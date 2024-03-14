@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from .models import Category, Subcategory, Question, Option
+from .models import Category, Subcategory, Question, Option, QuizAttempt
 
 class OptionInline(admin.TabularInline):
     model = Option
@@ -13,6 +13,11 @@ class QuestionInline(admin.TabularInline):
 class SubcategoryInline(admin.TabularInline):
     model = Subcategory
     extra = 1
+    
+class SubcategoryAdmin(admin.ModelAdmin):
+    list_display = ('name','category','is_active')
+    list_editable = ['is_active']
+
 
 class CategoryAdmin(admin.ModelAdmin):
     inlines = [SubcategoryInline]
@@ -24,8 +29,13 @@ class CategoryAdmin(admin.ModelAdmin):
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [OptionInline]
 
+class QuizAttemptAdmin(admin.ModelAdmin):
+    list_display = ('user','subcategory')
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(QuizAttempt, QuizAttemptAdmin)
+admin.site.register(Subcategory, SubcategoryAdmin)
 
 
 

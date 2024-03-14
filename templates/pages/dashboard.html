@@ -20,8 +20,11 @@
                                     <p class="card-text">Are you in for a {{ category }} challenge?</p>
                                     <div class="d-flex flex-wrap mb-2">
                                         {% for subcategory in category.subcategory_set.all %}
-                                            
-                                            <a  href="{% url 'index' category=category.id subcategory=subcategory.id %}" class="btn btn-info btn-sm mr-2 mb-2"> {{ subcategory.name }}</a>
+                                            {% if subcategory.id not in category.attempted_subcategories %}
+                                                <a href="{% url 'start_quiz' category_id=category.id subcategory_id=subcategory.id %}" class="btn btn-info btn-sm mr-2 mb-2">{{ subcategory.name }}</a>
+                                            {% else %}
+                                                <button class="btn btn-secondary btn-sm mr-2 mb-2" disabled>{{ subcategory.name }}</button>
+                                            {% endif %}
                                         {% endfor %}
                                     </div>
                                 </div>
