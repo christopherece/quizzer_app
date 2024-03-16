@@ -26,8 +26,11 @@
                                     {% for subcategory in category.subcategory_set.all %}
                                         <tr>
                                             <td>
-                                                {% if subcategory.is_active %}
+                                                {% if subcategory.is_active and subcategory.creation_date and subcategory.creation_time %}
                                                     <a href="{% url 'index' category=category.id subcategory=subcategory.id user_id=request.user.id %}" class="btn btn-info btn-sm mr-2 mb-2">{{ subcategory.name }}</a>
+                                                {% else %}
+                                                <a href="{% url 'index' category=category.id subcategory=subcategory.id user_id=request.user.id %}" class="btn btn-info btn-sm mr-2 mb-2 disabled">{{ subcategory.name }}</a>
+
                                                 {% endif %}
                                             </td>
                                             <td>{{ subcategory.creation_date }}</td>
