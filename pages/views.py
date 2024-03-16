@@ -1,3 +1,4 @@
+from datetime import timezone
 from django.shortcuts import render, redirect
 from pages.models import Category, Subcategory, Question, Option, QuizAttempt
 from users.models import Profile, StudentStats
@@ -121,6 +122,7 @@ def submit_quiz(request):
                     user=user,
                     name=user.profile.name,
                     category=category,
+                    date_finish=timezone.now(),
                     subcategory=subcategory,
                     score=score,
                     total_questions=total_questions,

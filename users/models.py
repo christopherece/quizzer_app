@@ -34,8 +34,7 @@ class StudentStats(models.Model):
     score = models.IntegerField(default=0)
     total_questions = models.IntegerField(default=0)
     score_percentage = models.FloatField(default=0)
-    creation_date = models.DateField(null=True, blank=True)  # Date when the subcategory was created
-    creation_time = models.TimeField(null=True, blank=True)  # Time when the subcategory was created
+    date_finish = models.DateTimeField(null=True, blank=True)  # Date when the subcategory was created
     is_enabled = models.BooleanField(default=True)
 
     id = models.UUIDField(default=uuid.uuid4,unique=True, primary_key=True, editable=False)
