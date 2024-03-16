@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% include 'partials/_alert.html' %}   
+<div class="container mt-5">
+    {% include 'partials/_alert.html' %} 
+</div>      
 
     <div class="container-fluid mt-5">
         <h3>Welcome {{ request.user.profile.name }}!</h3>
@@ -26,15 +28,15 @@
                                     {% for subcategory in category.subcategory_set.all %}
                                         <tr>
                                             <td>
-                                                {% if subcategory.is_active and subcategory.creation_date and subcategory.creation_time %}
+                                                {% if subcategory.is_active and subcategory.exam_date and subcategory.exam_time %}
                                                     <a href="{% url 'index' category=category.id subcategory=subcategory.id user_id=request.user.id %}" class="btn btn-info btn-sm mr-2 mb-2">{{ subcategory.name }}</a>
                                                 {% else %}
                                                 <a href="{% url 'index' category=category.id subcategory=subcategory.id user_id=request.user.id %}" class="btn btn-info btn-sm mr-2 mb-2 disabled">{{ subcategory.name }}</a>
 
                                                 {% endif %}
                                             </td>
-                                            <td>{{ subcategory.creation_date }}</td>
-                                            <td>{{ subcategory.creation_time }}</td>
+                                            <td>{{ subcategory.exam_date }}</td>
+                                            <td>{{ subcategory.exam_time }}</td>
                                             <td>{{ subcategory.created_by.profile.name }}</td>
                                         </tr>
                                     {% endfor %}
