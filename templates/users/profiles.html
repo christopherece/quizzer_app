@@ -3,104 +3,82 @@
 {% block content %}
     {% include 'partials/_alert.html' %}   
 
-
     <div class="container-fluid mt-5">
-        <h3>Welcome {{request.user.profile.name}}!</h3>
-
-
+        <h3>Welcome {{ request.user.profile.name }}!</h3>
     </div>
 
-
-        <section id="profiles">
-            <div class="container-fluid">
+    <section id="profiles">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col">
-                <div class="card">
-                    <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                        <!-- <th>Subject</th> -->
-                        <th>Subjects</th>
-
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Teacher</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        
-                            <tr>                                
+                    <div class="card">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Subjects</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Teacher</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 {% for category in categories %}
-                                    {% for subcategory in category.subcategory_set.all %}  
-    
+                                    {% for subcategory in category.subcategory_set.all %}
+                                        <tr>
                                             <td>
-                                                    {% if subcategory.is_active %}
-                                                                                                
-                                                        <a  href="{% url 'index' category=category.id subcategory=subcategory.id user_id=request.user.id %}" class="btn btn-info btn-sm mr-2 mb-2"> {{ subcategory.name }}</a>
-                                                    {% endif %}
-                                            </td>         
-                                            <td>{{subcategory.creation_date}}</td>
-                                            <td>{{subcategory.creation_time}}</td>                   
-                                            <td>{{subcategory.created_by.profile.name}}</td>
-                                
-                                        {% endfor %}
-
+                                                {% if subcategory.is_active %}
+                                                    <a href="{% url 'index' category=category.id subcategory=subcategory.id user_id=request.user.id %}" class="btn btn-info btn-sm mr-2 mb-2">{{ subcategory.name }}</a>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ subcategory.creation_date }}</td>
+                                            <td>{{ subcategory.creation_time }}</td>
+                                            <td>{{ subcategory.created_by.profile.name }}</td>
+                                        </tr>
                                     {% endfor %}
-            
-                            </tr>
-                  
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    </tbody>
-                    </table>
-                </div>
-                </div>
-            </div>
-            </div>
-        </section>
-<p></p>
-<p></p>
-        <section id="stats">
-            <div class="container-fluid">
+    <p></p>
+    <p></p>
+
+    <section id="stats">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col">
-                <div class="card">
-                    
-                    <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                        <th>Subject</th>
-                        <th>Teacher</th>
-                        <th>Exam Date</th>
-                        <th>Time</th>
-                        <th>Score</th>
-                        <th>Percentage</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        {% for studstat in studstats %}
-
-                        <tr>
-                            <td>{{studstat.subcategory.name}}</td>
-                            <td>{{studstat.category.created_by.profile.name}}</td>
-                            <td>{{studstat.creation_date}}</td>
-                            <td>{{studstat.creation_time}}</td>
-                            <td>{{studstat.score}}</td>
-                            <td>{{studstat.score_percentage}} %</td>
-
-                        </tr>
-
-                        {% endfor %}
-
-
-                    </tbody>
-                    </table>
-                </div>
+                    <div class="card">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Teacher</th>
+                                    <th>Exam Date</th>
+                                    <th>Time</th>
+                                    <th>Score</th>
+                                    <th>Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for studstat in studstats %}
+                                    <tr>
+                                        <td>{{ studstat.subcategory.name }}</td>
+                                        <td>{{ studstat.category.created_by.profile.name }}</td>
+                                        <td>{{ studstat.creation_date }}</td>
+                                        <td>{{ studstat.creation_time }}</td>
+                                        <td>{{ studstat.score }}</td>
+                                        <td>{{ studstat.score_percentage }} %</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            </div>
-        </section>
+        </div>
+    </section>
 {% endblock %}
