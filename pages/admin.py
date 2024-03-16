@@ -29,12 +29,12 @@ class CategoryAdmin(admin.ModelAdmin):
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [OptionInline]
 
-class QuizAttemptAdmin(admin.ModelAdmin):
-    list_display = ('user','subcategory')
+# class QuizAttemptAdmin(admin.ModelAdmin):
+#     list_display = ('user','subcategory')
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(QuizAttempt, QuizAttemptAdmin)
+# admin.site.register(QuizAttempt, QuizAttemptAdmin)
 admin.site.register(Subcategory, SubcategoryAdmin)
 
 
