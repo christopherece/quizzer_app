@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h2>Simple Quiz App</h2>
+    <p class="description">
+        In today's digital world, learning is becoming simpler with the help of technology.
+        Introducing an easy-to-use quiz app designed for teachers and students.
+    </p>
+    
+    <div class="features">
+        <h2>Features</h2>
+        <ul>
+            <li>Teachers can create quizzes with different question types like multiple-choice or short answer.</li>
+            <li>Students can log in, take the quiz, and get their results instantly.</li>
+            <li>Results are also sent directly to the teacher.</li>
+            <li>This app encourages communication between teachers, students, and parents.</li>
+            <li>Education becomes more transparent and collaborative.</li>
+        </ul>
+    </div>
+    
+    <p class="summary">In summary, this quiz app simplifies learning by making assessment easy for both teachers and students.</p>
+</div>
+
+<style>
+    
+    .features {
+        margin-top: 40px;
+    }
+    
+    .features h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .features ul {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
+    
+    .features li {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}

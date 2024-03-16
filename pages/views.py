@@ -15,7 +15,9 @@ from django.contrib.auth.models import User
 
 
 
-@login_required(login_url='loginUser')
+def about(request):
+    
+    return render(request, 'pages/about.html')
 def dashboard(request, category_id):
     # categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
     categories = Category.objects.filter(is_active=True, created_by=request.user).prefetch_related('subcategory_set', 'question_set__option_set')
