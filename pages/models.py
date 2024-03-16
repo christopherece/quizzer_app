@@ -14,6 +14,8 @@ class Category(models.Model):
 class Subcategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
+    creation_date = models.DateField(null=True, blank=True)  # Date when the subcategory was created
+    creation_time = models.TimeField(null=True, blank=True)  # Time when the subcategory was created
     is_active = models.BooleanField(default=True)
 
     
