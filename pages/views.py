@@ -42,7 +42,7 @@ def index(request, category, subcategory, user_id):
             messages.error(request, 'You already took the Exam!')
             categories = Category.objects.filter(is_active=True).prefetch_related('subcategory_set', 'question_set__option_set')
             subcategories = Subcategory.objects.all()
-            studstats = StudentStats.objects.all()
+            studstats = StudentStats.objects.filter(user=request.user)
             context = {
                 'categories': categories,
                 'studstats':studstats,
