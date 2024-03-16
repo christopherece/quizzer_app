@@ -22,11 +22,10 @@
                     <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                        <!-- <th>Subject</th> -->
-                        <th>Subjects</th>
+                            <th>Teacher</th>
+                            <th>Subjects</th>
                         <th>Date</th>
                         <th>Time</th>
-                        <th>Teacher</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,19 +33,20 @@
                         {% for category in categories %}
 
                         <tr>
+                            <td>{{category.created_by.profile.name}}</td>
+
                             {% for subcategory in category.subcategory_set.all %}  
 
-                            <td>
-                                    {% if subcategory.is_active %}
-                                                                                
-                                        <a  href="{% url 'index' category=category.id subcategory=subcategory.id user_id=request.user.id %}" class="btn btn-info btn-sm mr-2 mb-2"> {{ subcategory.name }}</a>
-                                    {% endif %}
-                            </td>   
-                            <td>{{subcategory.creation_date}}</td>
-                            <td>{{subcategory.creation_time}}</td> 
+                                <td>
+                                        {% if subcategory.is_active %}
+                                                                                    
+                                            <a  href="{% url 'index' category=category.id subcategory=subcategory.id user_id=request.user.id %}" class="btn btn-info btn-sm mr-2 mb-2"> {{ subcategory.name }}</a>
+                                        {% endif %}
+                                </td>   
+                                <td>{{subcategory.creation_date}}</td>
+                                <td>{{subcategory.creation_time}}</td> 
                             {% endfor %}
                         
-                            <td>{{category.created_by.profile.name}}</td>
                          
                             
                         </tr>
