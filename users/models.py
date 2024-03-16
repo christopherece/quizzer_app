@@ -36,6 +36,8 @@ class StudentStats(models.Model):
     score_percentage = models.FloatField(default=0)
     is_enabled = models.BooleanField(default=True)
     id = models.UUIDField(default=uuid.uuid4,unique=True, primary_key=True, editable=False)
+    # class Meta:
+    #     unique_together = ('name', 'subcategory')
 
     def __str__(self):
         return str(self.user)

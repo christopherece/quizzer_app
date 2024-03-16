@@ -33,7 +33,22 @@ def dashboard(request, category_id):
     return render(request, 'pages/dashboard.html', context)
 
 @login_required(login_url='loginUser')
-def index(request, category, subcategory):
+def index(request, category, subcategory, user_id):
+    user_id =StudentStats.objects.filter(user_id=user_id)
+    if request.user.is_authenticated:
+        user_id = request.user.id
+        has_examed = StudentStats.objects.filter(subcategory=subcategory, user_id = user_id)
+        if has_examed:
+            messages.error(request, 'You already took the Exam!')
+            categories = Category.objects.filter(is_active=True).prefetch_related('subcategory_set', 'question_set__option_set')
+            subcategories = Subcategory.objects.all()
+            studstats = StudentStats.objects.all()
+            context = {
+                'categories': categories,
+                'studstats':studstats,
+                'subcategories':subcategories
+            }
+            return render(request, 'users/profiles.html', context)
     questions = list(Question.objects.filter(category=category, subcategory=subcategory))
 
     random.shuffle(questions)
