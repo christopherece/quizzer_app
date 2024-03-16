@@ -42,7 +42,8 @@ def profiles(request):
     # categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
     # categories = Category.objects.filter(is_active=True, created_by=request.user).prefetch_related('subcategory_set', 'question_set__option_set')
     categories = Category.objects.filter(is_active=True).prefetch_related('subcategory_set', 'question_set__option_set')
-    subcategories = Subcategory.objects.values('name','creation_date').order_by('is_active', 'name')
+    subcategories = Subcategory.objects.values('name','creation_date').order_by('is_active')
+    studstats = StudentStats.objects.filter(user=request.user)
     context = {
         'categories': categories,
         'studstats':studstats,
