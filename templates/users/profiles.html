@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% include 'partials/_alert.html' %}
-{{subcategories}}
-   
+    {% include 'partials/_alert.html' %}   
 
 
     <div class="container-fluid mt-5">
@@ -33,23 +31,23 @@
                     <tbody>
                         
                         {% for category in categories %}
-
-                        <tr>                                
                             {% for subcategory in category.subcategory_set.all %}  
 
-                                <td>
-                                        {% if subcategory.is_active %}
-                                                                                    
-                                            <a  href="{% url 'index' category=category.id subcategory=subcategory.id user_id=request.user.id %}" class="btn btn-info btn-sm mr-2 mb-2"> {{ subcategory.name }}</a>
-                                        {% endif %}
-                                </td>         
-                                <td>{{subcategory.creation_date}}</td>
-                                <td>{{subcategory.creation_time}}</td>                   
-                                <td>{{subcategory.created_by.profile.name}}</td>
-                            
-                            {% endfor %}
+                            <tr>                                
 
-                        </tr>
+                                    <td>
+                                            {% if subcategory.is_active %}
+                                                                                        
+                                                <a  href="{% url 'index' category=category.id subcategory=subcategory.id user_id=request.user.id %}" class="btn btn-info btn-sm mr-2 mb-2"> {{ subcategory.name }}</a>
+                                            {% endif %}
+                                    </td>         
+                                    <td>{{subcategory.creation_date}}</td>
+                                    <td>{{subcategory.creation_time}}</td>                   
+                                    <td>{{subcategory.created_by.profile.name}}</td>
+                                
+
+                            </tr>
+                            {% endfor %}
 
                         {% endfor %}
 
