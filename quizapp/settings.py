@@ -15,9 +15,9 @@ SECRET_KEY = 'django-insecure-auva=2&0q0op*!zeamd221*ylws9o1p-jazw=-@8+@v$j#-s62
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.10.221', 'localhost','kidsquizapp.balaydalakay.com']
+ALLOWED_HOSTS = ['192.168.10.221', 'localhost','kidsquizapp.balaydalakay.com','quizmaker.balaydalakay.com']
 CSRF_TRUSTED_ORIGINS = [
-    'https://kidsquizapp.balaydalakay.com','http://kidsquizapp.balaydalakay.com'
+    'https://kidsquizapp.balaydalakay.com','http://kidsquizapp.balaydalakay.com', 'https://quizmaker.balaydalakay.com','http://quizmaker.balaydalakay.com'
 ]
 
 # Application definition
