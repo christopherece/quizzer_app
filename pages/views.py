@@ -121,20 +121,23 @@ def submit_quiz(request):
 
         # Create or update the StudentStats object
         student_stats = StudentStats.objects.create(
-                    user=user,
-                    name=user.profile.name,
-                    category=category,
-                    date_finish=datetime.now(),
-                    subcategory=subcategory,
-                    score=score,
-                    total_questions=total_questions,
-                    score_percentage=score_percentage,
+                user=user,
+                name=user.profile.name,
+                category=category,
+                date_finish=datetime.now(),
+                subcategory=subcategory,
+                score=score,
+                total_questions=total_questions,
+                score_percentage=score_percentage,
                 )
         quiz_attempt = QuizAttempt.objects.create(
             user=user,
             subcategory=subcategory,
         )
 
+        stud_email = request.user.email
+        owner_name = subcategory.created_by
+        teacher_email = User.objects.get(username=owner_name).email
 
         context = {
             'score': score,
@@ -142,6 +145,8 @@ def submit_quiz(request):
             'answers': answers,
             'score_percentage': score_percentage,
             'user': request.user,
+            'stud_email': stud_email,
+            'teacher_email': teacher_email,
 
         }
         # Render the HTML template with context
@@ -151,11 +156,13 @@ def submit_quiz(request):
         plain_message = strip_tags(html_message)
 
         # Sending email
+        
+        recipient_list = [stud_email, teacher_email]
         send_mail(
             'QuizApp Result',
             html_message,  # Plain text version of the email
             'balaydalakay@gmail.com',  # From email address
-            ['christopheranchetaece@gmail.com'],  # To email address(es)
+            recipient_list,  # To email address(es)
             html_message=html_message,  # HTML version of the email
         )
         
