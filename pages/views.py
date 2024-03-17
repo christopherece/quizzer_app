@@ -157,7 +157,7 @@ def submit_quiz(request):
 
         # Sending email
         
-        recipient_list = [stud_email, teacher_email]
+        recipient_list = [stud_email,teacher_email]
         send_mail(
             'QuizApp Result',
             html_message,  # Plain text version of the email
