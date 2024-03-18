@@ -36,8 +36,4 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Question, QuestionAdmin)
 # admin.site.register(QuizAttempt, QuizAttemptAdmin)
 admin.site.register(Subcategory, SubcategoryAdmin)
-
-
-
-
 admin.site.register(Option)
