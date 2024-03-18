@@ -113,6 +113,22 @@
         },5000);
     </script>
 
+    <!-- Prevent F12 and Inspect Mode -->
+    <script>
+      document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
+
+    <script>
+      document.addEventListener('keydown', function(event) {
+          if (event.keyCode == 123) { // F12 key code
+              event.preventDefault();
+              return false;
+          }
+      });
+    </script>
+    <!-- Prevent F12 and Inspect Mode -->
+
+
     <script>
         const date = new Date();
         document.querySelector('.year').innerHTML = date.getFullYear();
