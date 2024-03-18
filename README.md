@@ -1,23 +1,26 @@
-About the Project
-In today's digital world, learning is becoming simpler with the help of technology. Introducing an easy-to-use quiz app designed for teachers and students. It was originally a project of mine for my daughter for a simple Math Quiz but end up creating an App for Teachers.
+# KidsQuiz App
 
-Features
-Teachers can create multiple type question.
-Students can log in, take the quiz, and result will show to students dashboard.
-Results sent directly to the teacher and student via email.
+In today's digital world, learning is becoming simpler with the help of technology. Introducing an easy-to-use quiz app designed for teachers and students. Originally conceived as a simple Math Quiz project for my daughter, it evolved into a comprehensive app catering to teachers' needs.
 
-Student Dashboard
-- Dashboard shows all available Exams and Taken exam stats
+## Features
 
-Teacher Dashboard
-- Teacher can create questions
-- Ability to publish the Exams on a certain date
+- **Multiple Question Types**: Teachers can create various types of questions to customize quizzes.
+- **Student Management**: Students can log in, take quizzes, and view their results on their dashboard.
+- **Automated Result Delivery**: Results are sent directly to both teachers and students via email.
 
+### Student Dashboard
 
-Install
-Clone Project - https://github.com/christopherece/kidsquiz_app.git
+- View all available exams.
+- Check statistics for taken exams.
 
-Docker
-- To Follow
+### Teacher Dashboard
 
+- Create questions for quizzes.
+- Schedule exams for specific dates.
 
+## Installation
+
+Clone the project repository:
+
+```bash
+git clone https://github.com/christopherece/kidsquiz_app.git
