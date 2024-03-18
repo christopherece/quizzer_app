@@ -8,6 +8,10 @@ class Category(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
     def __str__(self):
         return self.name
 
@@ -18,6 +22,10 @@ class Subcategory(models.Model):
     exam_date = models.DateField(null=True, blank=True)  # Date when the subcategory was created
     exam_time = models.TimeField(null=True, blank=True)  # Time when the subcategory was created
     is_active = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "Subject"
+        verbose_name_plural = "Subjects"
 
     
     def __str__(self):
@@ -37,6 +45,10 @@ class Option(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     text = models.CharField(max_length=255)
     is_correct = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Choice"
+        verbose_name_plural = "Choices"
 
     def __str__(self):
         return self.text
