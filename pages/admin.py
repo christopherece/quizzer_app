@@ -21,7 +21,7 @@ class SubcategoryAdmin(admin.ModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     inlines = [SubcategoryInline]
-    list_filter = ('name','created_by','is_active')
+    # list_filter = ('name','created_by','is_active')
     list_display = ('name','created_by','is_active')
     list_editable = ['is_active']
 

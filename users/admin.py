@@ -5,7 +5,7 @@ from .models import Profile, StudentStats
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'name', 'username', 'email', 'user_type', 'id')
-    list_filter = ('user_type',)
+    # list_filter = ('user_type',)
     search_fields = ('name', 'username', 'email')
     list_per_page = 100
 
