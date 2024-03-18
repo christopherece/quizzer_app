@@ -36,6 +36,8 @@ class Question(models.Model):
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
     text = models.TextField()
     explanation = models.TextField(blank=True, null=True)
+    photo_main = models.ImageField(upload_to='photos/', blank=True)
+
 
 
     def __str__(self):
