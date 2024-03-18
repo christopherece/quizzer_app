@@ -18,22 +18,6 @@ from django.contrib.auth.models import User
 def about(request):
     
     return render(request, 'pages/about.html')
-def dashboard(request, category_id):
-    # categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
-    categories = Category.objects.filter(is_active=True, created_by=request.user).prefetch_related('subcategory_set', 'question_set__option_set')
-    user = request.user
-    attempted_subcategories = QuizAttempt.objects.filter(user=user, subcategory__category_id=category_id).values_list('subcategory', flat=True)
-    subcategories = Subcategory.objects.filter(category_id=category_id).exclude(pk__in=attempted_subcategories)
-    for category in categories:
-        category.attempted_subcategories = QuizAttempt.objects.filter(user=user, subcategory__category=category).values_list('subcategory', flat=True)
-
-    context = {
-        'categories': categories,
-        'subcategories': subcategories,
-        'category_id': category_id,
-
-    }
-    return render(request, 'pages/dashboard.html', context)
 
 @login_required(login_url='loginUser')
 def index(request, category, subcategory, user_id):
@@ -185,20 +169,3 @@ def result(request, score, total_questions, correct_answers):
     
     return render(request, 'pages/result.html', context)
 
-def check_attempt(request):
-    if request.method == 'POST' and request.is_ajax():
-        category_id = request.POST.get('category_id')
-        subcategory_id = request.POST.get('subcategory_id')
-        user = request.user
-
-        # Check if QuizAttempt exists for the user and subject
-        attempt_exists = QuizAttempt.objects.filter(
-            user=user,
-            category_id=category_id,
-            subcategory_id=subcategory_id
-        ).exists()
-
-        return JsonResponse({'exists': attempt_exists})
-
-    # Return a 404 if accessed via GET or non-ajax request
-    return JsonResponse({'error': 'Method not allowed'}, status=404)
