@@ -20,7 +20,8 @@
                             <div class="row">
                                 <div class="col-md">
                                     <div class="card-body">
-                                      {% if category == '1' %}
+                                      {{question.category.name}}
+                                      {% if question.category.name == 'Math' %}
                                         <p class="card-text" style="font-size: 40px; text-align:center">{{ question.text }} = ?</p>
                                       {% else %}
                                         <p class="card-text" style="font-size: 30px; text-align:center">{{ question.text }}?</p>
@@ -28,7 +29,7 @@
                                       <hr>
                                         <ul style="text-align: left; list-style-type: none;">
                                           {% for option in question.option_set.all %}
-                                            {% if category == '1' %}
+                                            {% if question.category.name == 'Math' %}
                                               <li style="display: flex; align-items: center;">
                                                 <input type="radio" style="transform: scale(2.0)" name="q{{ question.id }}" value="{{ option.id }}" data-correct="{{ option.is_correct }}">
                                                 <label style="font-size: 40px; padding-left: 20px;"> {{ option.text }}</label>
