@@ -1,6 +1,10 @@
-# KidsQuiz App
+# Quiz App
 
 In today's digital world, learning is becoming simpler with the help of technology. Introducing an easy-to-use quiz app designed for teachers and students. Originally conceived as a simple Math Quiz project for my daughter, it evolved into a comprehensive app catering to teachers' needs.
+
+## Demo
+``bash
+https://quizmaker.balaydalakay.com/
 
 ## Features
 
