@@ -35,13 +35,13 @@
             {% if request.user.is_authenticated %}
 
                 <li
-                        {% if 'profiles' in request.path %}
+                        {% if 'index' in request.path %}
                             class="nav-item active mr-3"
                         {% else %}
                             class="nav-item mr-3"
                         {% endif %}
                     >
-                    <a class="nav-link" href="{% url 'profiles' %}">Profile</a>
+                    <a class="nav-link" href="{% url 'index' %}">Student Stats</a>
 
                 </li>
 

@@ -80,14 +80,16 @@ def logoutUser(request):
 
 @login_required(login_url='loginUser')
 def profiles(request):
-    # categories = Category.objects.prefetch_related('subcategory_set', 'question_set__option_set').all()
-    # categories = Category.objects.filter(is_active=True, created_by=request.user).prefetch_related('subcategory_set', 'question_set__option_set')
-    categories = Category.objects.filter(is_active=True).prefetch_related('subcategory_set', 'question_set__option_set').order_by('is_active')
-    subcategories = Subcategory.objects.values('name','exam_date','is_active').order_by('name') 
-    studstats = StudentStats.objects.filter(user=request.user)
-    context = {
-        'categories': categories,
-        'studstats':studstats,
-        'subcategories':subcategories
-    }
-    return render(request, 'users/profiles.html', context)
+    if request.user.is_authenticated:
+        categories = Category.objects.filter(is_active=True).prefetch_related('subcategory_set', 'question_set__option_set').order_by('is_active')
+        subcategories = Subcategory.objects.values('name','exam_date','is_active').order_by('name') 
+        studstats = StudentStats.objects.filter(user=request.user)
+        context = {
+            'categories': categories,
+            'studstats':studstats,
+            'subcategories':subcategories
+        }
+        return render(request, 'users/profiles.html', context)
+
+
+
