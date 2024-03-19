@@ -113,42 +113,6 @@
         },5000);
     </script>
 
-    <!-- Prevent F12 and Inspect Mode -->
-    <script>
-      document.addEventListener('contextmenu', event => event.preventDefault());
-    </script>
-
-    <script>
-      document.addEventListener('keydown', function(event) {
-          if (event.keyCode == 123) { // F12 key code
-              event.preventDefault();
-              return false;
-          }
-      });
-    </script>
-    <!-- Prevent F12 and Inspect Mode -->
-
-    <script>
-      // Save answer when a radio button is clicked
-      $('input[type="radio"]').on('change', function() {
-            const questionId = $(this).closest('.question').index() + 1; // Get the index of the question
-            const answer = $(this).val(); // Get the selected answer
-            sessionStorage.setItem(`answer_${questionId}`, answer); // Store the answer in sessionStorage
-        });
-
-        // Restore answers on page load
-        $(document).ready(function() {
-            $('.question').each(function(index) {
-                const questionId = index + 1;
-                const savedAnswer = sessionStorage.getItem(`answer_${questionId}`);
-                if (savedAnswer) {
-                    $(this).find(`input[value="${savedAnswer}"]`).prop('checked', true);
-                }
-            });
-        });
-    </script>
-
-
     <script>
         const date = new Date();
         document.querySelector('.year').innerHTML = date.getFullYear();

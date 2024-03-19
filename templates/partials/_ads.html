@@ -1,9 +1,15 @@
-<!-- Contact Form and Advertisement -->
-
+<!-- Main Content -->
+{% block content %}
 <div class="col-md-4 d-flex flex-column" style="padding-top: 20px;">
-    <div class="row mb-3 flex-grow-1">
-        <div class="col-md-12">
-            Ads Here!
+    <div class="card">
+        <div class="card-header text-white" style="background-color: teal;">
+            <h5 class="card-title mb-0">Current Time</h5>
+        </div>
+        <div class="card-body">
+            <div id="clock" style="font-size: 64px; text-align: center;"></div>
+            <p class="mt-3 text-center" id="date"></p>
+            <p class="mt-3 text-center" id="greeting"></p>
+            <p class="mt-3 text-center" id="quote"></p>
         </div>
     </div>
     <div class="row flex-grow-0">
@@ -15,3 +21,44 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        document.getElementById('clock').textContent = timeString;
+
+        // Determine the greeting
+        let greeting;
+        if (now.getHours() < 12) {
+            greeting = "Good morning";
+        } else if (now.getHours() < 18) {
+            greeting = "Good afternoon";
+        } else {
+            greeting = "Good evening";
+        }
+        document.getElementById('greeting').textContent = greeting;
+
+        // Define an array of quotes
+        const quotes = [
+            "The only way to do great work is to love what you do. - Steve Jobs",
+            "In the middle of difficulty lies opportunity. - Albert Einstein",
+            "It always seems impossible until it's done. - Nelson Mandela"
+            // Add more quotes as needed
+        ];
+
+        // Display a random quote
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        document.getElementById('quote').textContent = quotes[randomIndex];
+    }
+  
+    // Update the clock every second
+    setInterval(updateClock, 1000);
+  
+    // Initial call to display the clock immediately
+    updateClock();
+</script>

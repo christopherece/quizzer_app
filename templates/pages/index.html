@@ -14,17 +14,16 @@
                 <div id="questionContainer" class="position-relative">
                         {% for question in questions %}
                         <div class="card mt-3 question">
-                            <div class="card-header" style="background-color: #90EE90">
+                            <div class="card-header" style="background-color: teal">
                                 <h2 class="card-title" >Question {{ forloop.counter }}</h2>
                             </div>
                             <div class="row">
                                 <div class="col-md">
                                     <div class="card-body">
-                                      {{question.category.name}}
                                       {% if question.category.name == 'Math' %}
                                         <p class="card-text" style="font-size: 40px; text-align:center">{{ question.text }} = ?</p>
                                       {% else %}
-                                        <p class="card-text" style="font-size: 30px; text-align:center">{{ question.text }}?</p>
+                                        <p class="card-text" style="font-size: 30px; text-align:left">{{ question.text }}?</p>
                                       {% endif %}
                                       <hr>
                                         <ul style="text-align: left; list-style-type: none;">
@@ -82,4 +81,6 @@
             {% include 'partials/_ads.html' %}
         </div>
     </div>
+
+    
 {% endblock %}
