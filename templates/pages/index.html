@@ -57,12 +57,14 @@
                                             {% endfor %}
                                         </div> -->
                                     </div>
-                                </div>
+                                </div>                                    
+                                  {% if question.photo_main and question.photo_main.url %}
+
                                 <div class="col-md-4 d-flex align-items-center justify-content-center">
-                                    {% if question.photo_main and question.photo_main.url %}
                                         <img src="{{ question.photo_main.url }}" alt="Image" class="img-fluid" style="padding: 5px;">
-                                    {% endif %}
                                 </div> 
+                                {% endif %}
+
                             </div>
                         </div>
                         {% endfor %}
