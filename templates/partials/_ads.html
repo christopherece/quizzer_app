@@ -42,23 +42,30 @@
             greeting = "Good evening";
         }
         document.getElementById('greeting').textContent = greeting;
+    }
+  
+    // Define an array of quotes
+    const quotes = [
+        "The only way to do great work is to love what you do. - Steve Jobs",
+        "In the middle of difficulty lies opportunity. - Albert Einstein",
+        "It always seems impossible until it's done. - Nelson Mandela"
+        // Add more quotes as needed
+    ];
 
-        // Define an array of quotes
-        const quotes = [
-            "The only way to do great work is to love what you do. - Steve Jobs",
-            "In the middle of difficulty lies opportunity. - Albert Einstein",
-            "It always seems impossible until it's done. - Nelson Mandela"
-            // Add more quotes as needed
-        ];
-
+    function updateQuote() {
         // Display a random quote
         const randomIndex = Math.floor(Math.random() * quotes.length);
         document.getElementById('quote').textContent = quotes[randomIndex];
     }
-  
+
     // Update the clock every second
     setInterval(updateClock, 1000);
+
+    // Change the quote every 5 seconds
+    setInterval(updateQuote, 5000);
   
     // Initial call to display the clock immediately
     updateClock();
+    // Initial call to display a quote immediately
+    updateQuote();
 </script>
