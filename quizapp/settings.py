@@ -23,6 +23,7 @@ CSRF_TRUSTED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'teachers.apps.TeachersConfig',
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'questions.apps.QuestionsConfig',

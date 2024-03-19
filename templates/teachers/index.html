@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}     
+<div class="container mt-5">
+    <div id="greeting"></div>
+    <h3> Welcome {{ request.user.profile.name }}!</h3>
+</div>
+<h1>Student Stats</h1>
+    {% regroup student_stats by subcategory as student_stats_by_subcategory %}
+    <div class="container">
+        {% for subcategory_group in student_stats_by_subcategory %}
+            <div class="card mb-3">
+                <div class="card-header" style="background-color: teal;">{{ subcategory_group.grouper }}</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Score</th>
+                                    <th>Total Question</th>
+                                    <th>Percentage</th>
+                                    <th>Finished Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for stat in subcategory_group.list %}
+                                    <tr>
+                                        <td>{{ stat.name }}</td>
+                                        <td>{{ stat.score }}</td>
+                                        <td>{{ stat.total_questions }}</td>
+                                        <td>{{ stat.score_percentage }} %</td>
+                                        <td>{{ stat.date_finish }}</td>
+
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
