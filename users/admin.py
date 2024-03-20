@@ -14,4 +14,3 @@ class StudentStatsAdmin(admin.ModelAdmin):
 
 admin.site.register(StudentStats, StudentStatsAdmin)
 admin.site.register(Profile, ProfileAdmin)
-
