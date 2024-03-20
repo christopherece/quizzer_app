@@ -76,7 +76,7 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     messages.success(request, 'You are now log out')
-    return redirect('loginUser')
+    return redirect('profiles')
 
 @login_required(login_url='loginUser')
 def profiles(request):
