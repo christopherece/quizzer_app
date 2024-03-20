@@ -28,6 +28,19 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [OptionInline]
+    list_display = ('text','category','subcategory')
+    list_filter = ('category','subcategory')
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:  # Superuser can see all questions
+            return qs
+        return qs.filter(subcategory__created_by=request.user)
+
+
+class OptionAdmin(admin.ModelAdmin):
+    list_display = ('text','is_correct','question')
+
 
 # class QuizAttemptAdmin(admin.ModelAdmin):
 #     list_display = ('user','subcategory')
