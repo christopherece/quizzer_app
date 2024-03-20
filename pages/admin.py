@@ -15,15 +15,12 @@ class SubcategoryInline(admin.TabularInline):
     extra = 1
     
 class SubcategoryAdmin(admin.ModelAdmin):
-    list_display = ('name','category','is_active', 'created_by_name')
+    list_display = ('name','category','is_active')
     list_editable = ['is_active']
-
-    def created_by_name(self, obj):
-        return obj.created_by.profile.name if obj.created_by.profile else None
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        if request.user.is_superuser:  # Superuser can see all subcategories
+        if request.user.is_superuser:  # Superuser can see all categories
             return qs
         return qs.filter(created_by=request.user)
 
