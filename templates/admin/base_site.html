@@ -7,16 +7,6 @@
     </h1> 
 {% endblock %}
 
-{% block sidebar %}
-    {{ block.super }}
-    <div class="module">
-        <h2>Student Stats</h2>
-        <ul>
-            <li><a href="{% url 'admin:index' %}">Student Scores</a></li>
-        </ul>
-    </div>
-{% endblock %}
-
 {% block extrastyle %}
     <link rel="stylesheet" href="{% static 'css/admin.css' %}">
 {% endblock %}
