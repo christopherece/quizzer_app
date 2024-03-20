@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+
 urlpatterns = [
     path('teachers/', include('teachers.urls')),
     path('dashboard/', include('pages.urls')),

@@ -76,7 +76,7 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     messages.success(request, 'You are now log out')
-    return redirect('profiles')
+    return redirect('loginUser')
 
 @login_required(login_url='loginUser')
 def profiles(request):
@@ -93,6 +93,12 @@ def profiles(request):
             'student_stats':student_stats,
         }
         return render(request, 'users/profiles.html', context)
+    
+@login_required(login_url='loginUser')
+def admin_logout(request):
+    logout(request)
+    messages.success(request, 'You are now log out')
+    return redirect('loginUser')
     
 
 
