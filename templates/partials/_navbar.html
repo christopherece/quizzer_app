@@ -35,7 +35,7 @@
             {% if request.user.is_authenticated %}
 
                 <li
-                        {% if 'index' in request.path %}
+                        {% if '/' in request.path %}
                             class="nav-item active mr-3"
                         {% else %}
                             class="nav-item mr-3"

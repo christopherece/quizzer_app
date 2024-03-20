@@ -5,7 +5,7 @@
     {% include 'partials/_alert.html' %} 
 </div>      
 
-    <div class="container-fluid mt-5">
+    <div class="container mt-5">
         <div id="greeting"></div>
         <h3> Welcome {{ request.user.profile.name }}!</h3>
     </div>
@@ -47,8 +47,6 @@
                     </div>
                 </div>
             </section>
-
-            <p></p>
             <p></p>
             <section id="stats">
                 <div class="container-fluid">
@@ -93,10 +91,11 @@
 
     {% else %}
     <h1>Student Stats</h1>
-    {% regroup studstats by subcategory as studstats_by_subcategory %}
+    {% regroup student_stats by subcategory as student_stats_by_subcategory %}
     <div class="container">
-        {% for subcategory_group in studstats_by_subcategory %}
+        {% for subcategory_group in student_stats_by_subcategory %}
             <div class="card mb-3">
+                
                 <div class="card-header" style="background-color: teal;">{{ subcategory_group.grouper }}</div>
                 <div class="card-body">
                     <div class="table-responsive">

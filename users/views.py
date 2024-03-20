@@ -84,10 +84,13 @@ def profiles(request):
         categories = Category.objects.filter(is_active=True).prefetch_related('subcategory_set', 'question_set__option_set').order_by('is_active')
         subcategories = Subcategory.objects.values('name','exam_date','is_active').order_by('name') 
         studstats = StudentStats.objects.filter(user=request.user)
+        student_stats = StudentStats.objects.filter(subcategory__created_by=request.user)
+
         context = {
             'categories': categories,
             'studstats':studstats,
-            'subcategories':subcategories
+            'subcategories':subcategories,
+            'student_stats':student_stats,
         }
         return render(request, 'users/profiles.html', context)
 
