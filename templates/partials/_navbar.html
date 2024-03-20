@@ -33,7 +33,7 @@
 
         <ul class="navbar-nav ml-auto">
             {% if request.user.is_authenticated %}
-
+                {% if request.user.profile.user_type == 'Teacher' %}
                 <li
                         {% if '/' in request.path %}
                             class="nav-item active mr-3"
@@ -44,6 +44,10 @@
                     <a class="nav-link" href="{% url 'index' %}">Student Stats</a>
 
                 </li>
+                <li>
+                    <a class="nav-link" href="/admin/pages/question/add/">Add Question</a>
+                </li>
+                {% endif %}
 
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'logoutUser' %}">

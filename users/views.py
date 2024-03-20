@@ -93,6 +93,8 @@ def profiles(request):
             'student_stats':student_stats,
         }
         return render(request, 'users/profiles.html', context)
+    
+
 
 
 
