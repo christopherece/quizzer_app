@@ -15,8 +15,8 @@ class SubcategoryInline(admin.TabularInline):
     extra = 1
     
 class SubcategoryAdmin(admin.ModelAdmin):
-    list_display = ('name','category','is_active')
-    list_editable = ['is_active']
+    list_display = ('name','category','is_active','exam_date','exam_time')
+    list_editable = ['is_active','exam_date','exam_time']
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
