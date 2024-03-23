@@ -4,7 +4,7 @@ from django.http import JsonResponse
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
@@ -17,7 +17,7 @@ class Category(models.Model):
 
 class Subcategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     exam_date = models.DateField(null=True, blank=True)  # Date when the subcategory was created
     exam_time = models.TimeField(null=True, blank=True)  # Time when the subcategory was created
