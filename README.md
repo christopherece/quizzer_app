@@ -27,3 +27,4 @@ Clone the project repository:
 
 ```bash
 git clone https://github.com/christopherece/kidsquiz_app.git
+docker pull meztro/quizer_app
